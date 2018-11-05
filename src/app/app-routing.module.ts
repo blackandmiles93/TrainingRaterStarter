@@ -1,15 +1,17 @@
-import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { SessionsListComponent } from './sessions/sessions-list/sessions-list.component';
-import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from "@angular/router";
+import { HomeComponent } from "./home/home.component";
+import { SessionsListComponent } from "./sessions/sessions-list/sessions-list.component";
+import { NgModule } from "@angular/core";
+import { UserListComponent } from "./users/user-list/user-list.component";
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'sessions', component: SessionsListComponent },
+  { path: "home", component: HomeComponent },
+  { path: "sessions", component: SessionsListComponent },
+  { path: "users", component: UserListComponent }
 ];
 
 @NgModule({
   exports: [RouterModule],
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes)]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
