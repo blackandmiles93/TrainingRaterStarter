@@ -1,4 +1,4 @@
-const Sessions = require("../models/session").Sessions;
+const Sessions = require("../models").Sessions;
 
 const getAll = async (req, res) => {
   res.setHeader("Content-Type", "application/json");

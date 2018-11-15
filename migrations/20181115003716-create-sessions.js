@@ -9,14 +9,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      startTime: {
-        type: Sequelize.DATE,
-        allowNull: false
+        type: Sequelize.STRING
       },
       location: {
+        type: Sequelize.STRING
+      },
+      startTime: {
         type: Sequelize.STRING
       },
       createdAt: {

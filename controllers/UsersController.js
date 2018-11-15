@@ -1,4 +1,4 @@
-const Users = require("../models/user").Users;
+const Users = require("../models").Users;
 
 const getAll = async (req, res) => {
   res.setHeader("Content-Type", "application/json");

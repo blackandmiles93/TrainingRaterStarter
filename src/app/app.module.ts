@@ -3,23 +3,25 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
-import { SessionsService } from "./sessions/sessions.service";
-import { SessionsListComponent } from "./sessions/sessions-list/sessions-list.component";
 import { HomeComponent } from "./home/home.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { UserListComponent } from "./users/user-list/user-list.component";
-import { UsersService } from "./users/users.service";
+import { HttpClientModule } from "@angular/common/http";
+import { SessionsModule } from "./sessions/sessions.module";
+import { UsersModule } from "./users/users.modules";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SessionsListComponent,
-    HomeComponent,
-    UserListComponent
+  declarations: [AppComponent, HomeComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    SessionsModule,
+    UsersModule,
+    AppRoutingModule,
+    NgbModule
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule, NgbModule],
-  providers: [SessionsService, UsersService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
