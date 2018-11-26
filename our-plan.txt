@@ -1,0 +1,12 @@
+Session detail page
+- display a session from the db
+- update that session on save (update)
+-- service update call
+- save a new session (create)
+-- service create call
+- route for this page
+-- the route should tell me which session I'm working with
+- trigger this route from the session-list page
+-- add new button will route to the detail page with
+--- some kinda blank or new indicator
+--- click on the row to edit it

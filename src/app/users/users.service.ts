@@ -13,10 +13,21 @@ export interface IUsers {
 
 @Injectable()
 export class UsersService {
-  users: IUsers[] = [];
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<IUsers[]> {
     return this.http.get<IUsers[]>("http://localhost:5000/users");
+  }
+
+  getUserById(id: number): Observable<IUsers> {
+    return this.http.get<IUsers>(`http://localhost:5000/users/${id}`);
+  }
+
+  save(user: IUsers): Observable<IUsers | number[]> {
+    if (user.id) {
+      return this.http.put<number[]>(`http://localhost:5000/users`, user);
+    } else {
+      return this.http.post<IUsers>(`http://localhost:5000/users`, user);
+    }
   }
 }

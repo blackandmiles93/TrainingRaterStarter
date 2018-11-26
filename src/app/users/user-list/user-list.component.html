@@ -1,14 +1,18 @@
 <div class="container">
+  <button class="btn btn-primary" (click)="goToAdd()">Add User</button>
   <div class="row">
-    <div class="col-md-4">First Name</div>
-    <div class="col-md-4">Last Name</div>
+    <div class="col-md-4"><strong>First Name</strong></div>
+    <div class="col-md-4"><strong>Last Name</strong></div>
+    <div class="col-md-4"><strong>Email</strong></div>
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users">
-      <div class="row">
-        <div class="col-md-4">{{ user.firstName }}</div>
-        <div class="col-md-4">{{ user.lastName }}</div>
-        <div class="col-md-4">{{ user.email }}</div>
+      <div class="row" [style.cursor]="'pointer'" (click)="goToEdit(user.id)">
+        <div class="row">
+          <div class="col-md-4">{{ user.firstName }}</div>
+          <div class="col-md-4">{{ user.lastName }}</div>
+          <div class="col-md-4">{{ user.email }}</div>
+        </div>
       </div>
     </li>
   </ul>
