@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {}
   );
+  // this will create a foreign key in the ratings table
   Sessions.associate = function(models) {
-    // associations can be defined here
+    models.Sessions.hasMany(models.Ratings, {
+      foreignKey: "sessionId",
+      sourceKey: "id"
+    });
   };
   return Sessions;
 };

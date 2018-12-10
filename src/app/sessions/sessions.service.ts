@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { ISessionRating } from "./SessionRating/session-ratings.service";
 // import "rxjs/add/operator/map";
 
 export interface ISession {
@@ -10,6 +11,8 @@ export interface ISession {
   startTime: string;
   createdAt: string;
   updatedAt: string;
+  averageRating: number;
+  uRating: ISessionRating;
 }
 
 @Injectable()

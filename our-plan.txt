@@ -10,3 +10,25 @@ Session detail page
 -- add new button will route to the detail page with
 --- some kinda blank or new indicator
 --- click on the row to edit it
+(All done)
+
+SessionRating Component
+- display the avg rating
+- rate the session
+- service to work with ratings (mock data for now)
+- this component should work for detail page and list page
+- no routing for this, implemented via selector
+- select dropdown (1,2,etc)
+- v1 not fancy, just working for now
+-- Rating can be anu number??
+
+Back End Security
+- secure API endpoints (I'm assuming the authUser)
+
+Front End Security
+- Auth Service (singleton)
+-- responsible for determining isAuthenticated
+-- resonsible for hitting login endpoint
+- secure pages or routes
+-- want this to be easy to implement everywhere
+- when hitting endpoints from Front End how to include secruity token

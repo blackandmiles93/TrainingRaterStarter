@@ -3,14 +3,36 @@ require("./config/config");
 require("./global_functions");
 const models = require("./models");
 const sessions = require("./controllers/SessionsController");
-const users = require("./controllers/UsersController");
+const usersController = require("./controllers/UsersController");
+const ratings = require("./controllers/RatingsController");
 const bodyParser = require("body-parser");
-
+const passport = require("passport");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+const Users = require("./models").Users;
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+var opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = CONFIG.jwt_encryption;
 
+//Passport Strategy
+
+passport.use(
+  new JwtStrategy(opts, async function(jwt_payload, done) {
+    let err, user;
+    [err, user] = await to(Users.findById(jwt_payload.user_id));
+    if (err) return done(err, false);
+    if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
+  })
+);
 // to handle cors
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
@@ -51,14 +73,38 @@ if (CONFIG.app === "dev") {
 }
 
 //sessions
-app.get("/sessions", sessions.getAll);
-app.get("/sessions/:sessionId", sessions.get);
-app.post("/sessions", sessions.create);
-app.post("/sessions", sessions.update);
+app.get(
+  "/sessions",
+  passport.authenticate("jwt", { session: false }),
+  sessions.getAll
+);
+app.get(
+  "/sessions/:sessionId",
+  passport.authenticate("jwt", { session: false }),
+  sessions.get
+);
+app.post(
+  "/sessions",
+  passport.authenticate("jwt", { session: false }),
+  sessions.create
+);
+app.post(
+  "/sessions",
+  passport.authenticate("jwt", { session: false }),
+  sessions.update
+);
 //users
-app.get("/users", users.getAll);
-app.get("/users/:userId", users.get);
-app.post("/users", users.create);
-app.post("/users", users.update);
+app.get("/users", usersController.getAll);
+app.get("/users/:userId", usersController.get);
+app.post("/users", usersController.create);
+// app.post("/users", usersController.update);
 
+//login
+app.post("/login", usersController.login);
+app.post(
+  "/ratings/:sessionId",
+  passport.authenticate("jwt", { session: false }),
+  ratings.create
+);
+app.put("/ratings/:ratingId", ratings.update);
 module.exports = app;
